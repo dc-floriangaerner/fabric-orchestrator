@@ -1,0 +1,38 @@
+site_name: Fabric Orchestrator
+site_description: Python library for orchestrating Microsoft Fabric workspace deployments
+site_author: Florian Gaerner
+site_url: https://github.com/dc-floriangaerner/fabric-orchestrator
+
+repo_name: dc-floriangaerner/fabric-orchestrator
+repo_url: https://github.com/dc-floriangaerner/fabric-orchestrator
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+  features:
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - API Reference:
+      - Overview: api/overview.md
+      - Workspace Management: api/workspace-management.md
+      - Deployment: api/deployment.md
+      - Configuration: api/configuration.md
+  - Contributing: contributing.md
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - toc:
+      permalink: true
