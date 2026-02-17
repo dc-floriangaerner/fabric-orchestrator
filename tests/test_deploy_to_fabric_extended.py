@@ -7,7 +7,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from scripts.deploy_to_fabric import (
+from fabric_orchestrator.deploy_to_fabric import (
     DeploymentResult,
     DeploymentSummary,
     build_deployment_results_json,
@@ -311,7 +311,7 @@ class TestDeployWorkspaceIntegration:
         self, mock_client, mock_ensure, mock_deploy, temp_workspace_dir, mock_azure_credential
     ):
         """Test complete deploy_workspace workflow."""
-        from scripts.deploy_to_fabric import deploy_workspace
+        from fabric_orchestrator.deploy_to_fabric import deploy_workspace
 
         mock_ensure.return_value = "workspace-id-123"
         mock_client.return_value = MagicMock()
@@ -339,7 +339,7 @@ class TestDeployWorkspaceIntegration:
         self, mock_client, mock_ensure, mock_deploy, tmp_path, mock_azure_credential
     ):
         """Test deploy_workspace handles config load failure."""
-        from scripts.deploy_to_fabric import deploy_workspace
+        from fabric_orchestrator.deploy_to_fabric import deploy_workspace
 
         result = deploy_workspace(
             workspace_folder="NonExistent",
@@ -358,7 +358,7 @@ class TestDeployWorkspaceIntegration:
         self, mock_client, mock_ensure, mock_deploy, temp_workspace_dir, mock_azure_credential
     ):
         """Test deploy_workspace handles deployment API failure."""
-        from scripts.deploy_to_fabric import deploy_workspace
+        from fabric_orchestrator.deploy_to_fabric import deploy_workspace
 
         mock_ensure.return_value = "workspace-id-123"
         mock_client.return_value = MagicMock()

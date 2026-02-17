@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 import pytest
 from azure.core.exceptions import HttpResponseError
 
-from scripts.fabric_workspace_manager import (
+from fabric_orchestrator.fabric_workspace_manager import (
     add_entra_id_group_admin,
     add_workspace_admin,
     check_role_assignment_exists,
@@ -107,7 +107,7 @@ class TestAssignWorkspaceRoleInternal:
     @patch("scripts.fabric_workspace_manager.check_role_assignment_exists")
     def test_assign_role_skips_if_exists(self, mock_check, mock_fabric_client):
         """Test that role assignment is skipped if already exists."""
-        from scripts.fabric_workspace_manager import _assign_workspace_role
+        from fabric_orchestrator.fabric_workspace_manager import _assign_workspace_role
 
         mock_check.return_value = True
 
@@ -127,7 +127,7 @@ class TestAssignWorkspaceRoleInternal:
     @patch("scripts.fabric_workspace_manager.check_role_assignment_exists")
     def test_assign_role_none_principal_id_service_principal(self, mock_check, mock_fabric_client, capsys):
         """Test that None principal_id for Service Principal logs warning."""
-        from scripts.fabric_workspace_manager import _assign_workspace_role
+        from fabric_orchestrator.fabric_workspace_manager import _assign_workspace_role
 
         _assign_workspace_role(
             workspace_id="ws-id",
@@ -145,7 +145,7 @@ class TestAssignWorkspaceRoleInternal:
     @patch("scripts.fabric_workspace_manager.check_role_assignment_exists")
     def test_assign_role_none_principal_id_group(self, mock_check, mock_fabric_client):
         """Test that None principal_id for Entra ID group logs info."""
-        from scripts.fabric_workspace_manager import _assign_workspace_role
+        from fabric_orchestrator.fabric_workspace_manager import _assign_workspace_role
 
         # Should not raise any exceptions
         _assign_workspace_role(
@@ -164,7 +164,7 @@ class TestAssignWorkspaceRoleInternal:
     @patch("scripts.fabric_workspace_manager.check_role_assignment_exists")
     def test_assign_role_404_service_principal(self, mock_check, mock_fabric_client):
         """Test role assignment with 404 error for Service Principal."""
-        from scripts.fabric_workspace_manager import _assign_workspace_role
+        from fabric_orchestrator.fabric_workspace_manager import _assign_workspace_role
 
         mock_check.return_value = False
         error = HttpResponseError(message="Not Found")
@@ -184,7 +184,7 @@ class TestAssignWorkspaceRoleInternal:
     @patch("scripts.fabric_workspace_manager.check_role_assignment_exists")
     def test_assign_role_404_group(self, mock_check, mock_fabric_client):
         """Test role assignment with 404 error for Entra ID group."""
-        from scripts.fabric_workspace_manager import _assign_workspace_role
+        from fabric_orchestrator.fabric_workspace_manager import _assign_workspace_role
 
         mock_check.return_value = False
         error = HttpResponseError(message="Not Found")
@@ -243,28 +243,28 @@ class TestPrintTroubleshootingHints:
 
     def test_print_hints_workspace_creation_permissions(self):
         """Test troubleshooting hints for workspace creation permissions."""
-        from scripts.fabric_workspace_manager import _print_troubleshooting_hints
+        from fabric_orchestrator.fabric_workspace_manager import _print_troubleshooting_hints
 
         # Should not raise any exceptions
         _print_troubleshooting_hints("Service Principal lacks workspace creation permissions")
 
     def test_print_hints_capacity_error(self):
         """Test troubleshooting hints for capacity errors."""
-        from scripts.fabric_workspace_manager import _print_troubleshooting_hints
+        from fabric_orchestrator.fabric_workspace_manager import _print_troubleshooting_hints
 
         # Should not raise any exceptions
         _print_troubleshooting_hints("Invalid capacity ID")
 
     def test_print_hints_object_id_error(self):
         """Test troubleshooting hints for Object ID errors."""
-        from scripts.fabric_workspace_manager import _print_troubleshooting_hints
+        from fabric_orchestrator.fabric_workspace_manager import _print_troubleshooting_hints
 
         # Should not raise any exceptions
         _print_troubleshooting_hints("Invalid Service Principal Object ID")
 
     def test_print_hints_generic_error(self):
         """Test troubleshooting hints for generic errors."""
-        from scripts.fabric_workspace_manager import _print_troubleshooting_hints
+        from fabric_orchestrator.fabric_workspace_manager import _print_troubleshooting_hints
 
         # Should not raise any exceptions
         _print_troubleshooting_hints("Some other error occurred")
@@ -278,7 +278,7 @@ class TestEnsureWorkspaceExistsExtended:
     @patch("scripts.fabric_workspace_manager.add_entra_id_group_admin")
     def test_ensure_workspace_with_entra_group(self, mock_add_group, mock_add_admin, mock_check, mock_fabric_client):
         """Test ensuring workspace with Entra ID group assignment."""
-        from scripts.fabric_workspace_manager import ensure_workspace_exists
+        from fabric_orchestrator.fabric_workspace_manager import ensure_workspace_exists
 
         mock_check.return_value = "existing-workspace-id"
 
@@ -298,7 +298,7 @@ class TestEnsureWorkspaceExistsExtended:
     @patch("scripts.fabric_workspace_manager._print_troubleshooting_hints")
     def test_ensure_workspace_prints_hints_on_error(self, mock_print_hints, mock_check, mock_fabric_client):
         """Test that troubleshooting hints are printed when ensure_workspace_exists fails."""
-        from scripts.fabric_workspace_manager import ensure_workspace_exists
+        from fabric_orchestrator.fabric_workspace_manager import ensure_workspace_exists
 
         mock_check.side_effect = Exception("API connection failed")
 

@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import pytest
 
-from scripts.deploy_to_fabric import (
+from fabric_orchestrator.deploy_to_fabric import (
     DeploymentResult,
     DeploymentSummary,
     discover_workspace_folders,

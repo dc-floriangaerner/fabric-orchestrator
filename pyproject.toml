@@ -1,7 +1,7 @@
 [project]
-name = "dc-fabric-cicd"
-version = "1.0.0"
-description = "Reference architecture for Microsoft Fabric CI/CD with multiple workspace support"
+name = "fabric-orchestrator"
+version = "0.1.0"
+description = "Python library for orchestrating Microsoft Fabric workspace deployments with configuration-based CI/CD"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
@@ -40,6 +40,11 @@ dev = [
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["fabric_orchestrator*"]
+exclude = ["tests*"]
+
 [tool.ruff]
 # Enable line length of 120 characters (Black-compatible)
 line-length = 120
@@ -76,7 +81,7 @@ unfixable = []
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
 
 [tool.ruff.lint.isort]
-known-first-party = ["scripts"]
+known-first-party = ["fabric_orchestrator"]
 
 [tool.ruff.format]
 # Use double quotes for strings (Black-compatible)
@@ -94,7 +99,7 @@ line-ending = "auto"
 [tool.pytest.ini_options]
 minversion = "8.0"
 testpaths = ["tests"]
-pythonpath = ["scripts"]
+pythonpath = ["src"]
 python_files = ["test_*.py"]
 python_classes = ["Test*"]
 python_functions = ["test_*"]
@@ -102,7 +107,7 @@ addopts = [
     "-v",
     "--strict-markers",
     "--tb=short",
-    "--cov=scripts",
+    "--cov=fabric_orchestrator",
     "--cov-report=term-missing",
     "--cov-report=html",
 ]
@@ -112,7 +117,7 @@ markers = [
 ]
 
 [tool.coverage.run]
-source = ["scripts"]
+source = ["fabric_orchestrator"]
 omit = [
     "tests/*",
     "*/__init__.py",

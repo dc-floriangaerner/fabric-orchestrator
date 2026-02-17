@@ -5,7 +5,7 @@
 
 import logging
 
-from scripts.logger import get_logger, setup_logger
+from fabric_orchestrator.logger import get_logger, setup_logger
 
 
 class TestSetupLogger:
