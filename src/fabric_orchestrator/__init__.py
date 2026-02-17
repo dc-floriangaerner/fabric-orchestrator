@@ -19,18 +19,6 @@ Example:
 __version__ = "1.0.0"
 
 # Core data models
-from .deployer import DeploymentResult, DeploymentSummary
-
-# Workspace management functions
-from .workspace_manager import (
-    assign_workspace_role,
-    check_role_assignment_exists,
-    check_workspace_exists,
-    create_workspace,
-    ensure_workspace_exists,
-    grant_workspace_role,
-)
-
 # Configuration
 from .config import (
     CONFIG_FILE,
@@ -41,9 +29,21 @@ from .config import (
     SEPARATOR_SHORT,
     VALID_ENVIRONMENTS,
 )
+from .deployer import DeploymentResult, DeploymentSummary
 
 # Logging utilities
 from .logger import get_logger, setup_logger
+
+# Workspace management functions
+from .workspace_manager import (
+    add_entra_id_group_admin,
+    add_workspace_admin,
+    assign_workspace_role,
+    check_role_assignment_exists,
+    check_workspace_exists,
+    create_workspace,
+    ensure_workspace_exists,
+)
 
 __all__ = [
     # Version
@@ -52,12 +52,13 @@ __all__ = [
     "DeploymentResult",
     "DeploymentSummary",
     # Workspace management
+    "add_entra_id_group_admin",
+    "add_workspace_admin",
     "assign_workspace_role",
     "check_workspace_exists",
     "create_workspace",
     "ensure_workspace_exists",
     "check_role_assignment_exists",
-    "grant_workspace_role",
     # Configuration
     "CONFIG_FILE",
     "VALID_ENVIRONMENTS",

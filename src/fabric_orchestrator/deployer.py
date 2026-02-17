@@ -34,8 +34,8 @@ from .config import (
     SEPARATOR_SHORT,
     VALID_ENVIRONMENTS,
 )
-from .workspace_manager import ensure_workspace_exists
 from .logger import get_logger
+from .workspace_manager import ensure_workspace_exists
 
 # Initialize logger
 logger = get_logger(__name__)

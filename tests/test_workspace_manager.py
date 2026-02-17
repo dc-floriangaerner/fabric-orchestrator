@@ -10,11 +10,9 @@ from azure.core.exceptions import HttpResponseError
 
 from fabric_orchestrator.workspace_manager import (
     assign_workspace_role,
-    check_role_assignment_exists,
     check_workspace_exists,
     create_workspace,
     ensure_workspace_exists,
-    grant_workspace_role,
 )
 
 
@@ -152,7 +150,7 @@ class TestAssignWorkspaceRole:
 class TestEnsureWorkspaceExists:
     """Test suite for ensure_workspace_exists function."""
 
-    @patch("scripts.fabric_workspace_manager.check_workspace_exists")
+    @patch("fabric_orchestrator.workspace_manager.check_workspace_exists")
     def test_ensure_existing_workspace(self, mock_check, mock_fabric_client):
         """Test ensuring an existing workspace."""
         mock_check.return_value = "existing-workspace-id"
@@ -161,8 +159,8 @@ class TestEnsureWorkspaceExists:
 
         assert result == "existing-workspace-id"
 
-    @patch("scripts.fabric_workspace_manager.check_workspace_exists")
-    @patch("scripts.fabric_workspace_manager.create_workspace")
+    @patch("fabric_orchestrator.workspace_manager.check_workspace_exists")
+    @patch("fabric_orchestrator.workspace_manager.create_workspace")
     def test_ensure_create_new_workspace(self, mock_create, mock_check, mock_fabric_client):
         """Test ensuring workspace when it doesn't exist."""
         mock_check.return_value = None
@@ -173,9 +171,9 @@ class TestEnsureWorkspaceExists:
         assert result == "new-workspace-id"
         mock_create.assert_called_once()
 
-    @patch("scripts.fabric_workspace_manager.check_workspace_exists")
-    @patch("scripts.fabric_workspace_manager.create_workspace")
-    @patch("scripts.fabric_workspace_manager.add_workspace_admin")
+    @patch("fabric_orchestrator.workspace_manager.check_workspace_exists")
+    @patch("fabric_orchestrator.workspace_manager.create_workspace")
+    @patch("fabric_orchestrator.workspace_manager.add_workspace_admin")
     def test_ensure_workspace_with_role_assignment(self, mock_add_admin, mock_create, mock_check, mock_fabric_client):
         """Test ensuring workspace with role assignment."""
         mock_check.return_value = None
@@ -186,7 +184,7 @@ class TestEnsureWorkspaceExists:
         assert result == "new-workspace-id"
         mock_add_admin.assert_called_once_with("new-workspace-id", "sp-object-id", mock_fabric_client)
 
-    @patch("scripts.fabric_workspace_manager.check_workspace_exists")
+    @patch("fabric_orchestrator.workspace_manager.check_workspace_exists")
     def test_ensure_workspace_check_fails(self, mock_check, mock_fabric_client):
         """Test ensure workspace when check fails."""
         mock_check.side_effect = Exception("API Error")
@@ -199,7 +197,7 @@ class TestEnsureWorkspaceExists:
 class TestWorkspaceManagementIntegration:
     """Integration tests for workspace management workflow."""
 
-    @patch("scripts.fabric_workspace_manager.FabricClient")
+    @patch("fabric_orchestrator.workspace_manager.FabricClient")
     def test_full_workspace_lifecycle(self, mock_client_class):
         """Test complete workspace creation and role assignment workflow."""
         pytest.xfail("Integration deployment workflow test not yet implemented")

@@ -5,16 +5,11 @@ import json
 import os
 import sys
 import time
-from pathlib import Path
 
-from azure.identity import ClientSecretCredential, DefaultAzureCredential
 from fabric_cicd import append_feature_flag, change_log_level
 
 from .config import (
     ENV_ACTIONS_RUNNER_DEBUG,
-    ENV_AZURE_CLIENT_ID,
-    ENV_AZURE_CLIENT_SECRET,
-    ENV_AZURE_TENANT_ID,
     ENV_DEPLOYMENT_SP_OBJECT_ID,
     ENV_FABRIC_ADMIN_GROUP_ID,
     ENV_FABRIC_CAPACITY_ID,
@@ -25,13 +20,13 @@ from .config import (
     VALID_ENVIRONMENTS,
 )
 from .deployer import (
+    DeploymentSummary,
     build_deployment_results_json,
     create_azure_credential,
     deploy_all_workspaces,
     discover_workspace_folders,
     print_deployment_summary,
     validate_environment,
-    DeploymentSummary,
 )
 from .logger import get_logger
 
