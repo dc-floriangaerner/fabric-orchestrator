@@ -116,7 +116,7 @@ Assign a role to a principal in a workspace.
 def assign_workspace_role(
     workspace_id: str,
     principal_id: str,
-    role: Literal["Admin", "Contributor", "Member", "Viewer"],
+    role: Literal["Admin", "Contributor", "Member"],
     fabric_client: FabricClient
 ) -> None
 ```
@@ -124,7 +124,7 @@ def assign_workspace_role(
 **Parameters:**
 - `workspace_id` (str): Workspace ID
 - `principal_id` (str): Principal ID (Service Principal or User Object ID)
-- `role` (str): Role to assign (Admin, Contributor, Member, Viewer)
+- `role` (str): Role to assign (Admin, Contributor, or Member)
 - `fabric_client` (FabricClient): Microsoft Fabric API client
 
 **Raises:**
