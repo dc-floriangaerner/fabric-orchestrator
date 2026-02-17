@@ -7,13 +7,12 @@ from unittest.mock import patch
 
 import pytest
 
-from fabric_orchestrator.deploy_to_fabric import (
-    DeploymentResult,
-    DeploymentSummary,
-    discover_workspace_folders,
-    get_workspace_name_for_environment,
-    load_workspace_config,
-)
+from fabric_orchestrator.config import load_workspace_config
+from fabric_orchestrator.deployment import DeploymentResult, DeploymentSummary
+from fabric_orchestrator.discovery import discover_workspace_folders
+
+# Import backwards compatibility alias
+from fabric_orchestrator.deploy_to_fabric import get_workspace_name_for_environment
 
 
 class TestLoadWorkspaceConfig:
