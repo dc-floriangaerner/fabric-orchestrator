@@ -3,7 +3,7 @@
 
 """Tests for deployment_config.py constants."""
 
-from scripts.deployment_config import (
+from fabric_orchestrator.deployment_config import (
     CONFIG_FILE,
     ENV_ACTIONS_RUNNER_DEBUG,
     ENV_AZURE_CLIENT_ID,

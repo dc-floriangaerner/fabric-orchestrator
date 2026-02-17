@@ -8,7 +8,7 @@ from unittest.mock import Mock, patch
 import pytest
 from azure.core.exceptions import HttpResponseError
 
-from scripts.fabric_workspace_manager import (
+from fabric_orchestrator.fabric_workspace_manager import (
     assign_workspace_role,
     check_workspace_exists,
     create_workspace,
