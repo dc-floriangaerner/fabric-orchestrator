@@ -18,23 +18,27 @@ Main Components:
 - deploy_all_workspaces: Deploy multiple workspaces from a directory
 - deploy_workspace: Deploy a single workspace
 - ensure_workspace_exists: Create workspace if needed
-- create_azure_credential: Configure Azure authentication
+- create_credential_from_env: Configure Azure authentication
 - create_fabric_client: Initialize Fabric API client
 """
 
 __version__ = "0.1.0"
 
 # Import key functions for public API
-from .deploy_to_fabric import (
+from .auth import create_credential_from_env
+from .config import get_workspace_name_from_config, load_workspace_config
+from .deployment import (
     DeploymentResult,
     DeploymentSummary,
-    create_azure_credential,
+    build_deployment_results_json,
     create_fabric_client,
     deploy_all_workspaces,
     deploy_workspace,
-    discover_workspace_folders,
-    validate_environment,
+    print_deployment_summary,
+    save_deployment_results,
 )
+from .deploy_to_fabric import validate_environment
+from .discovery import discover_workspace_folders, get_workspace_folders
 from .fabric_workspace_manager import (
     add_entra_id_group_admin,
     add_workspace_admin,
@@ -51,7 +55,16 @@ __all__ = [
     # Deployment functions
     "deploy_all_workspaces",
     "deploy_workspace",
+    "print_deployment_summary",
+    "build_deployment_results_json",
+    "save_deployment_results",
+    # Discovery functions
     "discover_workspace_folders",
+    "get_workspace_folders",
+    # Configuration functions
+    "load_workspace_config",
+    "get_workspace_name_from_config",
+    # Validation functions
     "validate_environment",
     # Workspace management
     "ensure_workspace_exists",
@@ -61,7 +74,7 @@ __all__ = [
     "add_entra_id_group_admin",
     "assign_workspace_role",
     # Authentication
-    "create_azure_credential",
+    "create_credential_from_env",
     "create_fabric_client",
     # Logging
     "get_logger",

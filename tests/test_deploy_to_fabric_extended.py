@@ -7,17 +7,20 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from fabric_orchestrator.deploy_to_fabric import (
+from fabric_orchestrator.auth import create_credential_from_env
+from fabric_orchestrator.deployment import (
     DeploymentResult,
     DeploymentSummary,
     build_deployment_results_json,
-    create_azure_credential,
     create_fabric_client,
     deploy_all_workspaces,
-    get_workspace_folders,
     print_deployment_summary,
-    validate_environment,
 )
+from fabric_orchestrator.deploy_to_fabric import validate_environment
+from fabric_orchestrator.discovery import get_workspace_folders
+
+# Alias for backwards compatibility
+create_azure_credential = create_credential_from_env
 
 
 class TestGetWorkspaceFolders:
@@ -311,7 +314,7 @@ class TestDeployWorkspaceIntegration:
         self, mock_client, mock_ensure, mock_deploy, temp_workspace_dir, mock_azure_credential
     ):
         """Test complete deploy_workspace workflow."""
-        from fabric_orchestrator.deploy_to_fabric import deploy_workspace
+        from fabric_orchestrator.deployment import deploy_workspace
 
         mock_ensure.return_value = "workspace-id-123"
         mock_client.return_value = MagicMock()
@@ -339,7 +342,7 @@ class TestDeployWorkspaceIntegration:
         self, mock_client, mock_ensure, mock_deploy, tmp_path, mock_azure_credential
     ):
         """Test deploy_workspace handles config load failure."""
-        from fabric_orchestrator.deploy_to_fabric import deploy_workspace
+        from fabric_orchestrator.deployment import deploy_workspace
 
         result = deploy_workspace(
             workspace_folder="NonExistent",
@@ -358,7 +361,7 @@ class TestDeployWorkspaceIntegration:
         self, mock_client, mock_ensure, mock_deploy, temp_workspace_dir, mock_azure_credential
     ):
         """Test deploy_workspace handles deployment API failure."""
-        from fabric_orchestrator.deploy_to_fabric import deploy_workspace
+        from fabric_orchestrator.deployment import deploy_workspace
 
         mock_ensure.return_value = "workspace-id-123"
         mock_client.return_value = MagicMock()
